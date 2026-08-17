@@ -1,5 +1,50 @@
 // ---- Workout-Karten (aufklappbar mit Übungstabelle) ----
 
+function buildPaceChart(intervalChart) {
+  // Segmente aus der Konfiguration in eine flache Liste auflösen (Wiederholungen expandieren)
+  const flat = [];
+  intervalChart.segments.forEach(seg => {
+    if (seg.repeat) {
+      for (let i = 0; i < seg.repeat; i++) {
+        flat.push({ label: seg.label, min: seg.min, mode: seg.mode });
+        if (seg.repeatWith) flat.push({ label: seg.repeatWith.label, min: seg.repeatWith.min, mode: seg.repeatWith.mode });
+      }
+    } else {
+      flat.push(seg);
+    }
+  });
+
+  const totalMin = flat.reduce((sum, s) => sum + s.min, 0);
+  const W = 600, H = 120, baseline = 100, top = 14;
+  const pxPerMin = W / totalMin;
+  const modeHeight = { walk: 0.28, run: 0.85 };
+  const modeColor = { walk: "#9cb8d6", run: "#d9542a" };
+
+  let x = 0;
+  const bars = flat.map(seg => {
+    const w = seg.min * pxPerMin;
+    const h = (baseline - top) * modeHeight[seg.mode];
+    const y = baseline - h;
+    const rect = `<rect x="${x.toFixed(1)}" y="${y.toFixed(1)}" width="${Math.max(w - 1, 0).toFixed(1)}" height="${h.toFixed(1)}" fill="${modeColor[seg.mode]}" rx="2"/>`;
+    x += w;
+    return rect;
+  }).join('');
+
+  return `
+    <div class="pace-chart">
+      <svg viewBox="0 0 ${W} ${H}" preserveAspectRatio="none">
+        <line x1="0" y1="${baseline}" x2="${W}" y2="${baseline}" stroke="var(--border)" stroke-width="1.5"/>
+        ${bars}
+      </svg>
+      <div class="pace-chart-legend">
+        <span><i style="background:#9cb8d6"></i>Gehen</span>
+        <span><i style="background:#d9542a"></i>Laufen</span>
+        <span class="pace-chart-total">${totalMin} Min gesamt</span>
+      </div>
+    </div>
+  `;
+}
+
 function workoutCard(workout, expanded) {
   const cfg = typeConfig[workout.type] || typeConfig.strength;
   const key = 'workout-' + workout.id;
@@ -29,6 +74,7 @@ function workoutCard(workout, expanded) {
     `;
   } else if (workout.sections) {
     bodyContent = `
+      ${workout.intervalChart ? buildPaceChart(workout.intervalChart) : ''}
       <table class="exercise-table section-table">
         <tbody>
           ${workout.sections.map(s => `
@@ -46,7 +92,6 @@ function workoutCard(workout, expanded) {
         ${workout.list.map(item => `
           <li>
             <span class="mobility-name">${item.name}</span>
-            <span class="mobility-img">${item.icon && exerciseIcons[item.icon] ? exerciseIcons[item.icon] : ''}</span>
           </li>
         `).join('')}
       </ul>

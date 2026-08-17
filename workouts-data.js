@@ -25,6 +25,13 @@ const workouts = [
     title: "Laufeinstieg Woche 1",
     subtitle: "Laufeinheit",
     type: "run",
+    intervalChart: {
+      segments: [
+        { label: "Warmup", min: 5, mode: "walk" },
+        { label: "Lauf", min: 1, mode: "run", repeat: 8, repeatWith: { label: "Gehen", min: 2, mode: "walk" } },
+        { label: "Cooldown", min: 5, mode: "walk" }
+      ]
+    },
     sections: [
       { label: "Warmup", content: "5 Min gehen" },
       { label: "Hauptteil", content: "8× (1 Min laufen / 2 Min gehen)" },
