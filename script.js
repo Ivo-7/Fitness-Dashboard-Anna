@@ -153,6 +153,45 @@ function sessionCard(session, expanded) {
   `;
 }
 
+function supplementGroupCard(group, expanded) {
+  const key = 'supplement-group-' + group.time.toLowerCase();
+  const isOpen = localStorage.getItem('open-' + key) === 'true' || expanded;
+  const count = group.items.length;
+
+  const body = count
+    ? group.items.map(item => `
+        <div class="supplement-item">
+          <div class="supplement-item-title">${item.title}</div>
+          <ul class="session-details">
+            ${item.details.map(d => `<li>${d}</li>`).join('')}
+          </ul>
+        </div>
+      `).join('')
+    : `<p class="empty-state">Keine Supplements in diesem Zeitfenster.</p>`;
+
+  return `
+    <div class="session c-coral ${isOpen ? 'open' : ''}" data-session-key="${key}">
+      <button class="session-head" data-toggle="${key}">
+        <span class="session-icon">${icons.supplement}</span>
+        <span class="session-main">
+          <span class="session-time">${count} Supplement${count === 1 ? '' : 's'}</span>
+          <span class="session-title">${group.time}</span>
+        </span>
+        <span class="session-chevron">${icons.chevron}</span>
+      </button>
+      <div class="session-body">
+        ${body}
+      </div>
+    </div>
+  `;
+}
+
+function renderSupplementGroups(groups, listId) {
+  const list = document.getElementById(listId);
+  if (!list) return;
+  list.innerHTML = groups.map(g => supplementGroupCard(g, false)).join('');
+}
+
 function renderTopics(topics, listId) {
   const list = document.getElementById(listId);
   if (!list) return;
@@ -168,14 +207,18 @@ function attachSessionToggles() {
     btn.addEventListener('click', () => {
       const card = btn.closest('.session');
       const container = card.parentElement;
+      const exclusive = container.id !== 'supplements-list';
 
-      // Andere offene Karten im selben Container schliessen (nur eine gleichzeitig offen)
-      container.querySelectorAll('.session.open').forEach(other => {
-        if (other !== card) {
-          other.classList.remove('open');
-          localStorage.setItem('open-' + other.dataset.sessionKey, 'false');
-        }
-      });
+      // Andere offene Karten im selben Container schliessen (ausser bei den Supplements,
+      // dort duerfen mehrere Zeitfenster gleichzeitig offen sein)
+      if (exclusive) {
+        container.querySelectorAll('.session.open').forEach(other => {
+          if (other !== card) {
+            other.classList.remove('open');
+            localStorage.setItem('open-' + other.dataset.sessionKey, 'false');
+          }
+        });
+      }
 
       const isOpen = card.classList.toggle('open');
       localStorage.setItem('open-' + btn.dataset.toggle, isOpen);
@@ -184,7 +227,7 @@ function attachSessionToggles() {
 }
 
 function enforceSingleOpenPerContainer() {
-  document.querySelectorAll('#workout-list, #supplements-list').forEach(container => {
+  document.querySelectorAll('#workout-list').forEach(container => {
     const openCards = container.querySelectorAll('.session.open');
     openCards.forEach((card, i) => {
       if (i > 0) {
@@ -196,7 +239,7 @@ function enforceSingleOpenPerContainer() {
 }
 
 renderWorkouts(workouts, 'workout-list');
-renderTopics(supplementRoutine, 'supplements-list');
+renderSupplementGroups(supplementGroups, 'supplements-list');
 enforceSingleOpenPerContainer();
 attachSessionToggles();
 

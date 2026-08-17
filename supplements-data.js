@@ -1,58 +1,60 @@
-// Supplement-Routine für Anna
-const supplementRoutine = [
+// Supplement-Routine für Anna, gruppiert nach Einnahme-Zeitfenster.
+// Kreatin (Timing eigentlich egal) wurde zusammen mit dem Protein-Shake
+// in den Nachmittag gelegt, da beides oft gemeinsam eingenommen wird.
+// Omega-3 steht am Abend, da im Ursprungstext "abends oft angenehmer" genannt wurde.
+const supplementGroups = [
   {
-    time: "Egal, Hauptsache täglich (Timing irrelevant)",
-    title: "Kreatin",
-    type: "supplement",
-    duration: null,
-    target: null,
-    details: [
-      "Muskelaufbau, Kraft",
-      "Unterstützt die Regeneration"
+    time: "Morgen",
+    items: [
+      {
+        title: "Vitamin D3 + K2",
+        details: [
+          "Zu einer fetthaltigen Mahlzeit – fettlöslich, wird so besser aufgenommen",
+          "Wichtig für Knochen und Immunsystem – in CH oft niedrig"
+        ]
+      }
     ]
   },
   {
-    time: "Nach dem Krafttraining, ggf. über den Tag verteilt",
-    title: "Protein",
-    type: "supplement",
-    duration: null,
-    target: null,
-    details: [
-      "Muskelaufbau/-erhalt",
-      "Besonders wichtig nach Muskelverlust in der Stillzeit"
+    time: "Mittag",
+    items: []
+  },
+  {
+    time: "Nachmittag",
+    items: [
+      {
+        title: "Protein",
+        details: [
+          "Nach dem Krafttraining, ggf. über den Tag verteilt",
+          "Muskelaufbau/-erhalt, besonders wichtig nach Muskelverlust in der Stillzeit"
+        ]
+      },
+      {
+        title: "Kreatin",
+        details: [
+          "Timing egal, Hauptsache täglich",
+          "Muskelaufbau, Kraft, unterstützt Regeneration"
+        ]
+      }
     ]
   },
   {
-    time: "Morgens, zu einer fetthaltigen Mahlzeit",
-    title: "Vitamin D3 + K2",
-    type: "supplement",
-    duration: null,
-    target: null,
-    details: [
-      "Fettlöslich, wird so besser aufgenommen",
-      "Wichtig für Knochen und Immunsystem – in CH oft niedrig"
-    ]
-  },
-  {
-    time: "Zu einer Mahlzeit, abends oft angenehmer (weniger Nachgeschmack)",
-    title: "Omega-3 (EPA/DHA)",
-    type: "supplement",
-    duration: null,
-    target: null,
-    details: [
-      "Unterstützt die Regeneration",
-      "Unterstützt zusätzlich die Gehirnentwicklung des Babys über die Muttermilch"
-    ]
-  },
-  {
-    time: "Abends, 30-60 Min vor dem Schlafen",
-    title: "Magnesium Bisglycinate",
-    type: "supplement",
-    duration: null,
-    target: null,
-    details: [
-      "Entspannung",
-      "Hilft gegen Wadenkrämpfe vom Laufen"
+    time: "Abend",
+    items: [
+      {
+        title: "Omega-3 (EPA/DHA)",
+        details: [
+          "Zu einer Mahlzeit, abends oft angenehmer (weniger Nachgeschmack)",
+          "Unterstützt Regeneration, zusätzlich die Gehirnentwicklung des Babys über die Muttermilch"
+        ]
+      },
+      {
+        title: "Magnesium Bisglycinate",
+        details: [
+          "30-60 Min vor dem Schlafen",
+          "Entspannung, hilft gegen Wadenkrämpfe vom Laufen"
+        ]
+      }
     ]
   }
 ];
