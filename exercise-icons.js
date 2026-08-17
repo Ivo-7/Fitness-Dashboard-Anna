@@ -1,60 +1,157 @@
-// Einfache, selbst gezeichnete Strichmännchen-Illustrationen je Übung/Pose.
-// Ein Icon-Key wird von mehreren Übungen geteilt, wenn die Ausgangsposition
-// sehr ähnlich ist (z.B. Rechts/Links-Varianten oder verwandte Dehnungen).
+// Eigene Silhouetten-Illustrationen je Übung/Pose: gedämpfte Körperkontur
+// (dicke, abgerundete Konturlinien statt Fotos) + ein Akzent-Kreis auf der
+// primär trainierten/gedehnten Muskelgruppe. Die Akzentfarbe übernimmt
+// automatisch die Kartenfarbe (var(--session-color)) der jeweiligen Karte.
+// Ein Icon-Key wird von mehreren Übungen geteilt, wenn Ausgangsposition
+// und Zielregion sehr ähnlich sind (z.B. Rechts/Links-Varianten).
+
+function buildIcon(bodyPaths, highlightCx, highlightCy, highlightR) {
+  return `<svg viewBox="0 0 60 60" fill="none">
+    <g stroke="currentColor" stroke-width="7" stroke-linecap="round" stroke-linejoin="round" opacity="0.45">
+      ${bodyPaths}
+    </g>
+    <circle cx="${highlightCx}" cy="${highlightCy}" r="${highlightR}" fill="var(--session-color)" opacity="0.85"/>
+  </svg>`;
+}
+
 const exerciseIcons = {
-  "goblet-squat": '<svg viewBox="0 0 60 60" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="30" cy="10" r="4"/><line x1="30" y1="14" x2="30" y2="28"/><line x1="30" y1="18" x2="24" y2="24"/><line x1="30" y1="18" x2="36" y2="24"/><rect x="25" y="22" width="10" height="6" rx="1"/><line x1="30" y1="28" x2="18" y2="42"/><line x1="30" y1="28" x2="42" y2="42"/><line x1="18" y1="42" x2="20" y2="54"/><line x1="42" y1="42" x2="40" y2="54"/></svg>',
+  "goblet-squat": buildIcon(
+    '<circle cx="30" cy="9" r="5" fill="currentColor" stroke="none"/><path d="M30 15v13"/><path d="M30 28l-12 14"/><path d="M30 28l12 14"/><path d="M18 42l2 12"/><path d="M42 42l-2 12"/>',
+    30, 36, 10
+  ),
 
-  "glute-bridge": '<svg viewBox="0 0 60 60" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="10" cy="40" r="4"/><line x1="14" y1="40" x2="30" y2="34"/><line x1="30" y1="34" x2="42" y2="46"/><line x1="42" y1="46" x2="42" y2="56"/><line x1="30" y1="34" x2="34" y2="52"/><line x1="34" y1="52" x2="46" y2="52"/></svg>',
+  "glute-bridge": buildIcon(
+    '<circle cx="10" cy="40" r="5" fill="currentColor" stroke="none"/><path d="M14 40l16-6"/><path d="M30 34l12 12v10"/><path d="M30 34l4 18h12"/>',
+    31, 33, 8
+  ),
 
-  "lunge-static": '<svg viewBox="0 0 60 60" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="24" cy="10" r="4"/><line x1="24" y1="14" x2="24" y2="30"/><line x1="24" y1="30" x2="16" y2="44"/><line x1="16" y1="44" x2="16" y2="56"/><line x1="24" y1="30" x2="38" y2="40"/><line x1="38" y1="40" x2="34" y2="54"/></svg>',
+  "lunge-static": buildIcon(
+    '<circle cx="24" cy="9" r="5" fill="currentColor" stroke="none"/><path d="M24 15v15"/><path d="M24 30l-8 14v12"/><path d="M24 30l14 10-4 14"/>',
+    19, 37, 9
+  ),
 
-  "rdl": '<svg viewBox="0 0 60 60" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="18" cy="16" r="4"/><line x1="18" y1="20" x2="34" y2="30"/><line x1="34" y1="30" x2="34" y2="56"/><line x1="18" y1="20" x2="14" y2="40"/><rect x="9" y="38" width="9" height="6" rx="1"/></svg>',
+  "rdl": buildIcon(
+    '<circle cx="18" cy="15" r="5" fill="currentColor" stroke="none"/><path d="M18 20l16 10v26"/><path d="M18 20l-4 20"/>',
+    34, 42, 9
+  ),
 
-  "clamshell": '<svg viewBox="0 0 60 60" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="14" cy="20" r="4"/><line x1="18" y1="22" x2="34" y2="30"/><line x1="34" y1="30" x2="30" y2="44"/><line x1="30" y1="44" x2="42" y2="40"/></svg>',
+  "clamshell": buildIcon(
+    '<circle cx="14" cy="19" r="5" fill="currentColor" stroke="none"/><path d="M18 21l16 9"/><path d="M34 30l-4 14"/><path d="M34 30l12-4"/>',
+    33, 32, 8
+  ),
 
-  "side-leg-raise": '<svg viewBox="0 0 60 60" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="14" cy="20" r="4"/><line x1="18" y1="22" x2="34" y2="30"/><line x1="34" y1="30" x2="30" y2="50"/><line x1="34" y1="30" x2="50" y2="24"/></svg>',
+  "side-leg-raise": buildIcon(
+    '<circle cx="14" cy="19" r="5" fill="currentColor" stroke="none"/><path d="M18 21l16 9"/><path d="M34 30l-4 20"/><path d="M34 30l16-6"/>',
+    34, 29, 8
+  ),
 
-  "lateral-walk": '<svg viewBox="0 0 60 60" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="30" cy="10" r="4"/><line x1="30" y1="14" x2="30" y2="28"/><line x1="30" y1="28" x2="18" y2="42"/><line x1="30" y1="28" x2="42" y2="40"/><line x1="18" y1="42" x2="14" y2="54"/><line x1="42" y1="40" x2="48" y2="54"/><line x1="18" y1="47" x2="42" y2="45" stroke-dasharray="2 3"/></svg>',
+  "lateral-walk": buildIcon(
+    '<circle cx="30" cy="9" r="5" fill="currentColor" stroke="none"/><path d="M30 15v13"/><path d="M30 28l-12 14v12"/><path d="M30 28l12 12v14"/>',
+    30, 30, 9
+  ),
 
-  "plank": '<svg viewBox="0 0 60 60" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="34" r="4"/><line x1="16" y1="34" x2="46" y2="34"/><line x1="16" y1="34" x2="16" y2="46"/><line x1="46" y1="34" x2="46" y2="52"/></svg>',
+  "plank": buildIcon(
+    '<circle cx="12" cy="34" r="5" fill="currentColor" stroke="none"/><path d="M16 34h30"/><path d="M16 34v12"/><path d="M46 34v18"/>',
+    30, 34, 9
+  ),
 
-  "side-plank": '<svg viewBox="0 0 60 60" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="26" r="4"/><line x1="16" y1="28" x2="46" y2="40"/><line x1="20" y1="30" x2="20" y2="46"/></svg>',
+  "side-plank": buildIcon(
+    '<circle cx="12" cy="25" r="5" fill="currentColor" stroke="none"/><path d="M16 27l30 12"/><path d="M20 29v16"/>',
+    30, 33, 8
+  ),
 
-  "dead-bug": '<svg viewBox="0 0 60 60" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="14" cy="34" r="4"/><line x1="18" y1="34" x2="34" y2="34"/><line x1="34" y1="34" x2="34" y2="50"/><line x1="34" y1="34" x2="46" y2="24"/><line x1="18" y1="34" x2="10" y2="44"/><line x1="34" y1="34" x2="46" y2="44"/></svg>',
+  "dead-bug": buildIcon(
+    '<circle cx="14" cy="34" r="5" fill="currentColor" stroke="none"/><path d="M18 34h16"/><path d="M34 34v16"/><path d="M34 34l12-10"/><path d="M18 34l-8 10"/><path d="M34 34l12 10"/>',
+    26, 34, 8
+  ),
 
-  "row-band": '<svg viewBox="0 0 60 60" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="18" cy="16" r="4"/><line x1="18" y1="20" x2="34" y2="30"/><line x1="34" y1="30" x2="34" y2="56"/><line x1="18" y1="20" x2="10" y2="26"/><line x1="18" y1="20" x2="10" y2="14"/></svg>',
+  "row-band": buildIcon(
+    '<circle cx="18" cy="15" r="5" fill="currentColor" stroke="none"/><path d="M18 20l16 10v26"/><path d="M18 20l-8 6"/><path d="M18 20l-8-6"/>',
+    25, 24, 8
+  ),
 
-  "pushup-knee": '<svg viewBox="0 0 60 60" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="10" cy="30" r="4"/><line x1="14" y1="32" x2="40" y2="38"/><line x1="14" y1="32" x2="16" y2="44"/><line x1="40" y1="38" x2="40" y2="52"/></svg>',
+  "pushup-knee": buildIcon(
+    '<circle cx="10" cy="29" r="5" fill="currentColor" stroke="none"/><path d="M14 31l26 6"/><path d="M14 31v13"/><path d="M40 37v15"/>',
+    27, 34, 9
+  ),
 
-  "childs-pose": '<svg viewBox="0 0 60 60" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="46" cy="44" r="4"/><line x1="42" y1="44" x2="30" y2="30"/><line x1="30" y1="30" x2="10" y2="26"/><line x1="42" y1="44" x2="42" y2="56"/></svg>',
+  "childs-pose": buildIcon(
+    '<circle cx="46" cy="44" r="5" fill="currentColor" stroke="none"/><path d="M42 44l-12-14-20-4"/><path d="M42 44v12"/>',
+    36, 37, 8
+  ),
 
-  "cobra": '<svg viewBox="0 0 60 60" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="42" cy="26" r="4"/><line x1="38" y1="28" x2="18" y2="40"/><line x1="18" y1="40" x2="10" y2="40"/><line x1="34" y1="30" x2="34" y2="42"/></svg>',
+  "cobra": buildIcon(
+    '<circle cx="42" cy="25" r="5" fill="currentColor" stroke="none"/><path d="M38 27l-20 12h-8"/><path d="M34 29v13"/>',
+    26, 34, 8
+  ),
 
-  "squat-hold": '<svg viewBox="0 0 60 60" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="30" cy="10" r="4"/><line x1="30" y1="14" x2="30" y2="30"/><line x1="30" y1="30" x2="18" y2="44"/><line x1="30" y1="30" x2="42" y2="44"/><line x1="18" y1="44" x2="20" y2="56"/><line x1="42" y1="44" x2="40" y2="56"/></svg>',
+  "squat-hold": buildIcon(
+    '<circle cx="30" cy="9" r="5" fill="currentColor" stroke="none"/><path d="M30 15v15"/><path d="M30 30l-12 14v12"/><path d="M30 30l12 14v12"/>',
+    30, 37, 10
+  ),
 
-  "toe-reach": '<svg viewBox="0 0 60 60" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="30" cy="10" r="4"/><line x1="30" y1="14" x2="20" y2="34"/><line x1="20" y1="34" x2="16" y2="50"/><line x1="30" y1="14" x2="42" y2="50"/></svg>',
+  "toe-reach": buildIcon(
+    '<circle cx="30" cy="9" r="5" fill="currentColor" stroke="none"/><path d="M30 15l-10 19-4 16"/><path d="M30 15l12 35"/>',
+    36, 32, 9
+  ),
 
-  "side-bend": '<svg viewBox="0 0 60 60" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="34" cy="10" r="4"/><line x1="32" y1="14" x2="26" y2="34"/><line x1="26" y1="34" x2="26" y2="56"/><line x1="32" y1="14" x2="44" y2="8"/></svg>',
+  "side-bend": buildIcon(
+    '<circle cx="34" cy="9" r="5" fill="currentColor" stroke="none"/><path d="M32 15l-6 19v22"/><path d="M32 15l12-6"/>',
+    29, 24, 8
+  ),
 
-  "ball-roll-back": '<svg viewBox="0 0 60 60" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="34" cy="26" r="4"/><line x1="32" y1="30" x2="24" y2="38"/><line x1="24" y1="38" x2="24" y2="28"/><line x1="32" y1="30" x2="20" y2="44"/></svg>',
+  "ball-roll-back": buildIcon(
+    '<circle cx="34" cy="25" r="5" fill="currentColor" stroke="none"/><path d="M32 30l-8 8v-10"/><path d="M32 30l-12 14"/>',
+    28, 33, 8
+  ),
 
-  "leg-over-twist": '<svg viewBox="0 0 60 60" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="14" cy="20" r="4"/><line x1="18" y1="20" x2="38" y2="20"/><line x1="38" y1="20" x2="30" y2="40"/><line x1="18" y1="20" x2="14" y2="34"/></svg>',
+  "leg-over-twist": buildIcon(
+    '<circle cx="14" cy="19" r="5" fill="currentColor" stroke="none"/><path d="M18 19h20"/><path d="M38 19l-8 20"/><path d="M18 19l-4 14"/>',
+    26, 20, 8
+  ),
 
-  "sit-reach": '<svg viewBox="0 0 60 60" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="14" cy="20" r="4"/><line x1="16" y1="24" x2="30" y2="40"/><line x1="30" y1="40" x2="50" y2="40"/><line x1="16" y1="24" x2="42" y2="30"/></svg>',
+  "sit-reach": buildIcon(
+    '<circle cx="14" cy="19" r="5" fill="currentColor" stroke="none"/><path d="M16 23l14 16h20"/><path d="M16 23l26 6"/>',
+    29, 26, 8
+  ),
 
-  "lying-quad-stretch": '<svg viewBox="0 0 60 60" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="14" cy="24" r="4"/><line x1="18" y1="26" x2="36" y2="32"/><line x1="36" y1="32" x2="30" y2="46"/><line x1="30" y1="46" x2="40" y2="34"/></svg>',
+  "lying-quad-stretch": buildIcon(
+    '<circle cx="14" cy="23" r="5" fill="currentColor" stroke="none"/><path d="M18 25l18 6"/><path d="M36 31l-6 14"/><path d="M36 31l10-12"/>',
+    33, 31, 8
+  ),
 
-  "across-body-stretch": '<svg viewBox="0 0 60 60" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="30" cy="10" r="4"/><line x1="30" y1="14" x2="30" y2="40"/><line x1="30" y1="18" x2="46" y2="22"/><line x1="46" y1="22" x2="20" y2="26"/><line x1="30" y1="40" x2="24" y2="56"/><line x1="30" y1="40" x2="36" y2="56"/></svg>',
+  "across-body-stretch": buildIcon(
+    '<circle cx="30" cy="9" r="5" fill="currentColor" stroke="none"/><path d="M30 15v25"/><path d="M30 17l16 5-26 4"/><path d="M30 40l-6 16"/><path d="M30 40l6 16"/>',
+    30, 18, 7
+  ),
 
-  "cows-face": '<svg viewBox="0 0 60 60" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="30" cy="14" r="4"/><line x1="30" y1="18" x2="30" y2="40"/><line x1="30" y1="20" x2="40" y2="10"/><line x1="40" y1="10" x2="34" y2="30"/><line x1="30" y1="24" x2="22" y2="34"/><line x1="22" y1="34" x2="34" y2="30"/></svg>',
+  "cows-face": buildIcon(
+    '<circle cx="30" cy="13" r="5" fill="currentColor" stroke="none"/><path d="M30 18v22"/><path d="M30 19l10-10-6 20"/><path d="M30 23l-8 10 12-4"/>',
+    34, 19, 7
+  ),
 
-  "shoulder-stretch": '<svg viewBox="0 0 60 60" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="30" cy="10" r="4"/><line x1="30" y1="14" x2="30" y2="40"/><line x1="30" y1="16" x2="36" y2="6"/><line x1="36" y1="6" x2="30" y2="22"/></svg>',
+  "shoulder-stretch": buildIcon(
+    '<circle cx="30" cy="9" r="5" fill="currentColor" stroke="none"/><path d="M30 15v25"/><path d="M30 17l6-10-6 16"/>',
+    33, 11, 7
+  ),
 
-  "revolved-lunge": '<svg viewBox="0 0 60 60" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="24" cy="10" r="4"/><line x1="24" y1="14" x2="24" y2="28"/><line x1="24" y1="28" x2="16" y2="42"/><line x1="16" y1="42" x2="16" y2="56"/><line x1="24" y1="28" x2="38" y2="38"/><line x1="24" y1="18" x2="40" y2="6"/></svg>',
+  "revolved-lunge": buildIcon(
+    '<circle cx="24" cy="9" r="5" fill="currentColor" stroke="none"/><path d="M24 15v13"/><path d="M24 28l-8 14v14"/><path d="M24 28l14 10"/><path d="M24 17l16-11"/>',
+    24, 24, 8
+  ),
 
-  "wind-release": '<svg viewBox="0 0 60 60" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="14" cy="34" r="4"/><line x1="18" y1="34" x2="34" y2="34"/><line x1="34" y1="34" x2="26" y2="22"/><line x1="26" y1="22" x2="18" y2="30"/></svg>',
+  "wind-release": buildIcon(
+    '<circle cx="14" cy="34" r="5" fill="currentColor" stroke="none"/><path d="M18 34h16"/><path d="M34 34l-8-12-8 8"/>',
+    26, 30, 8
+  ),
 
-  "neck-side": '<svg viewBox="0 0 60 60" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="34" cy="10" r="4"/><line x1="30" y1="14" x2="30" y2="56"/><line x1="30" y1="18" x2="20" y2="24"/></svg>',
+  "neck-side": buildIcon(
+    '<circle cx="33" cy="9" r="5" fill="currentColor" stroke="none"/><path d="M30 14v42"/><path d="M30 17l-9 6"/>',
+    31, 15, 7
+  ),
 
-  "neck-forward": '<svg viewBox="0 0 60 60" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="30" cy="12" r="4"/><line x1="30" y1="16" x2="30" y2="56"/><line x1="26" y1="18" x2="34" y2="18"/></svg>'
+  "neck-forward": buildIcon(
+    '<circle cx="30" cy="11" r="5" fill="currentColor" stroke="none"/><path d="M30 15v41"/><path d="M25 17h9"/>',
+    30, 16, 7
+  )
 };

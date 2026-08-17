@@ -557,7 +557,7 @@ footer {
 
 .exercise-table th:first-child,
 .exercise-table td:first-child {
-  width: 40px;
+  width: 48px;
 }
 
 .exercise-table th:last-child,
@@ -617,21 +617,21 @@ footer {
 
 /* Übungsbilder */
 .exercise-img-cell {
-  width: 40px;
+  width: 48px;
   padding-right: 0 !important;
 }
 
 .exercise-img-cell svg {
-  width: 34px;
-  height: 34px;
+  width: 42px;
+  height: 42px;
   color: var(--text-secondary);
   display: block;
 }
 
 .mobility-img {
   flex-shrink: 0;
-  width: 34px;
-  height: 34px;
+  width: 42px;
+  height: 42px;
   color: var(--text-secondary);
 }
 
