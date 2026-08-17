@@ -14,6 +14,10 @@ const runProgram = [
   { week: 12, phase: "Phase 3 – Durchgehend laufen", segments: [{ label: "Lauf durchgehend", min: 35, mode: "run" }], summary: "35 Min durchgehend" }
 ];
 
+function formatMin(n) {
+  return Number.isInteger(n) ? String(n) : String(n).replace(".", ",");
+}
+
 // Baut Titel/Sections/IntervalChart für eine gewählte Woche zusammen
 // (Warmup/Cooldown 5 Min gehen bleiben für alle Wochen gleich)
 function buildRunWorkoutData(weekNum) {
@@ -23,8 +27,11 @@ function buildRunWorkoutData(weekNum) {
     ...entry.segments,
     { label: "Cooldown", min: 5, mode: "walk" }
   ];
+  const mainSeg = entry.segments[0];
+  const runMin = mainSeg.min;
+  const walkMin = mainSeg.repeatWith ? mainSeg.repeatWith.min : 0;
   return {
-    title: `Laufeinstieg Woche ${entry.week}`,
+    title: `Laufeinstieg ${formatMin(runMin)}:${formatMin(walkMin)}`,
     subtitle: `Laufeinheit · ${entry.phase}`,
     intervalChart: { segments: fullSegments },
     sections: [
@@ -40,7 +47,7 @@ function buildRunWorkoutData(weekNum) {
 const workouts = [
   {
     id: "laufeinstieg-woche-1",
-    title: "Laufeinstieg Woche 1",
+    title: "Laufeinstieg 1:2",
     subtitle: "Laufeinheit",
     type: "run",
     intervalChart: {
