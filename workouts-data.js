@@ -19,6 +19,18 @@ const workouts = [
       { name: "Rudern (Band oder Kurzhantel)", sets: "2 × 10-12" },
       { name: "Liegestütz auf Knien", sets: "2 × 8-12" }
     ]
+  },
+  {
+    id: "laufeinstieg-woche-1",
+    title: "Laufeinstieg Woche 1",
+    subtitle: "Laufeinheit",
+    type: "run",
+    sections: [
+      { label: "Warmup", content: "5 Min gehen" },
+      { label: "Hauptteil", content: "8× (1 Min laufen / 2 Min gehen)" },
+      { label: "Cooldown", content: "5 Min gehen" },
+      { label: "Zielbereich", content: "HF-Zone 2-3, lockeres Tempo" }
+    ]
   }
-  // Weitere 2 Workouts folgen
+  // Weiteres Workout folgt
 ];

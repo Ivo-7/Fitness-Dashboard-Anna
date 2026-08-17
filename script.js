@@ -4,6 +4,40 @@ function workoutCard(workout, expanded) {
   const cfg = typeConfig[workout.type] || typeConfig.strength;
   const key = 'workout-' + workout.id;
   const isOpen = localStorage.getItem('open-' + key) === 'true' || expanded;
+
+  let bodyContent = '';
+  if (workout.exercises) {
+    bodyContent = `
+      <table class="exercise-table">
+        <thead>
+          <tr><th>#</th><th>Übung</th><th>Sätze × Wdh.</th></tr>
+        </thead>
+        <tbody>
+          ${workout.exercises.map((ex, i) => `
+            <tr>
+              <td>${i + 1}</td>
+              <td>${ex.name}</td>
+              <td>${ex.sets}</td>
+            </tr>
+          `).join('')}
+        </tbody>
+      </table>
+    `;
+  } else if (workout.sections) {
+    bodyContent = `
+      <table class="exercise-table section-table">
+        <tbody>
+          ${workout.sections.map(s => `
+            <tr>
+              <td class="section-label">${s.label}</td>
+              <td>${s.content}</td>
+            </tr>
+          `).join('')}
+        </tbody>
+      </table>
+    `;
+  }
+
   return `
     <div class="session c-${cfg.color} ${isOpen ? 'open' : ''}" data-session-key="${key}">
       <button class="session-head" data-toggle="${key}">
@@ -15,20 +49,7 @@ function workoutCard(workout, expanded) {
         <span class="session-chevron">${icons.chevron}</span>
       </button>
       <div class="session-body">
-        <table class="exercise-table">
-          <thead>
-            <tr><th>#</th><th>Übung</th><th>Sätze × Wdh.</th></tr>
-          </thead>
-          <tbody>
-            ${workout.exercises.map((ex, i) => `
-              <tr>
-                <td>${i + 1}</td>
-                <td>${ex.name}</td>
-                <td>${ex.sets}</td>
-              </tr>
-            `).join('')}
-          </tbody>
-        </table>
+        ${bodyContent}
       </div>
     </div>
   `;
