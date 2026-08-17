@@ -10,19 +10,6 @@
   --radius: 14px;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --bg: #251c1e;
-    --card: #2f2427;
-    --border: #4a373c;
-    --text: #f6e9ea;
-    --text-secondary: #c9a9ae;
-    --accent: #f0a0bb;
-    --accent-bg: #3c2731;
-    --rest-bg: #332527;
-  }
-}
-
 * { box-sizing: border-box; }
 
 body {
@@ -440,22 +427,9 @@ footer {
 .session.c-purple  { --session-color: #b08fc7; }
 .session.c-gray    { --session-color: #b09a96; }
 
-@media (prefers-color-scheme: dark) {
-  .session.c-coral  { --session-color: #f0ab9c; }
-  .session.c-teal    { --session-color: #9bcbb9; }
-  .session.c-blue    { --session-color: #b3c5e8; }
-  .session.c-purple  { --session-color: #d1b6e3; }
-  .session.c-gray    { --session-color: #d3bfba; }
-}
-
 /* Zusätzliche Typ-Farben (Ernährung) */
 .session.c-amber { --session-color: #d19a4a; }
 .session.c-green { --session-color: #8ba85f; }
-
-@media (prefers-color-scheme: dark) {
-  .session.c-amber { --session-color: #f0c98a; }
-  .session.c-green { --session-color: #b8d495; }
-}
 
 /* Einkaufsliste */
 .shopping-list {
@@ -500,10 +474,6 @@ footer {
 
 /* Zusätzliche Typ-Farbe (Recovery-Wissen) */
 .session.c-pink { --session-color: #d1698f; }
-
-@media (prefers-color-scheme: dark) {
-  .session.c-pink { --session-color: #f0a8c1; }
-}
 
 /* Sektions-Überschrift (z.B. "Recovery-Grundlagen") */
 .section-heading {
