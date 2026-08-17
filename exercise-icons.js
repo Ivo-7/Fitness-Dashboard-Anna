@@ -8,10 +8,10 @@
 
 function buildIcon(bodyPaths, highlightCx, highlightCy, highlightR) {
   return `<svg viewBox="0 0 60 60" fill="none">
-    <g stroke="#9c988f" stroke-width="7.5" stroke-linecap="round" stroke-linejoin="round" opacity="0.8">
-      ${bodyPaths.replace(/fill="currentColor"/g, 'fill="#9c988f"')}
+    <g stroke="#b09a97" stroke-width="7.5" stroke-linecap="round" stroke-linejoin="round" opacity="0.8">
+      ${bodyPaths.replace(/fill="currentColor"/g, 'fill="#b09a97"')}
     </g>
-    <circle cx="${highlightCx}" cy="${highlightCy}" r="${highlightR}" fill="#d9542a" opacity="0.88"/>
+    <circle cx="${highlightCx}" cy="${highlightCy}" r="${highlightR}" fill="#d1567a" opacity="0.88"/>
   </svg>`;
 }
 

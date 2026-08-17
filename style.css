@@ -1,25 +1,25 @@
 :root {
-  --bg: #f6f5f2;
+  --bg: #fdf6f5;
   --card: #ffffff;
-  --border: #e2e0da;
-  --text: #232220;
-  --text-secondary: #6b6a65;
-  --accent: #185fa5;
-  --accent-bg: #e6f1fb;
-  --rest-bg: #f1efe8;
-  --radius: 10px;
+  --border: #f2dfe1;
+  --text: #3a2c2e;
+  --text-secondary: #93767b;
+  --accent: #d1567a;
+  --accent-bg: #fbe6ec;
+  --rest-bg: #f8eeec;
+  --radius: 14px;
 }
 
 @media (prefers-color-scheme: dark) {
   :root {
-    --bg: #17181a;
-    --card: #202224;
-    --border: #33353a;
-    --text: #f0efec;
-    --text-secondary: #9b9a96;
-    --accent: #85b7eb;
-    --accent-bg: #0c2b45;
-    --rest-bg: #26282b;
+    --bg: #251c1e;
+    --card: #2f2427;
+    --border: #4a373c;
+    --text: #f6e9ea;
+    --text-secondary: #c9a9ae;
+    --accent: #f0a0bb;
+    --accent-bg: #3c2731;
+    --rest-bg: #332527;
   }
 }
 
@@ -433,28 +433,28 @@ footer {
   background: var(--session-color, var(--text-secondary));
 }
 
-/* Typ-Farben */
-.session.c-coral  { --session-color: #D85A30; }
-.session.c-teal    { --session-color: #0F6E56; }
-.session.c-blue    { --session-color: #378ADD; }
-.session.c-purple  { --session-color: #7F77DD; }
-.session.c-gray    { --session-color: #888780; }
+/* Typ-Farben – sanfte, warme Palette */
+.session.c-coral  { --session-color: #e0836f; }
+.session.c-teal    { --session-color: #6fac96; }
+.session.c-blue    { --session-color: #8fa8d6; }
+.session.c-purple  { --session-color: #b08fc7; }
+.session.c-gray    { --session-color: #b09a96; }
 
 @media (prefers-color-scheme: dark) {
-  .session.c-coral  { --session-color: #F0997B; }
-  .session.c-teal    { --session-color: #5DCAA5; }
-  .session.c-blue    { --session-color: #85B7EB; }
-  .session.c-purple  { --session-color: #AFA9EC; }
-  .session.c-gray    { --session-color: #B4B2A9; }
+  .session.c-coral  { --session-color: #f0ab9c; }
+  .session.c-teal    { --session-color: #9bcbb9; }
+  .session.c-blue    { --session-color: #b3c5e8; }
+  .session.c-purple  { --session-color: #d1b6e3; }
+  .session.c-gray    { --session-color: #d3bfba; }
 }
 
 /* Zusätzliche Typ-Farben (Ernährung) */
-.session.c-amber { --session-color: #BA7517; }
-.session.c-green { --session-color: #639922; }
+.session.c-amber { --session-color: #d19a4a; }
+.session.c-green { --session-color: #8ba85f; }
 
 @media (prefers-color-scheme: dark) {
-  .session.c-amber { --session-color: #FAC775; }
-  .session.c-green { --session-color: #97C459; }
+  .session.c-amber { --session-color: #f0c98a; }
+  .session.c-green { --session-color: #b8d495; }
 }
 
 /* Einkaufsliste */
@@ -499,10 +499,10 @@ footer {
 }
 
 /* Zusätzliche Typ-Farbe (Recovery-Wissen) */
-.session.c-pink { --session-color: #D4537E; }
+.session.c-pink { --session-color: #d1698f; }
 
 @media (prefers-color-scheme: dark) {
-  .session.c-pink { --session-color: #ED93B1; }
+  .session.c-pink { --session-color: #f0a8c1; }
 }
 
 /* Sektions-Überschrift (z.B. "Recovery-Grundlagen") */
