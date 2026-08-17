@@ -8,16 +8,16 @@ const workouts = [
     exercises: [
       { name: "Goblet Squat", icon: "goblet-squat", img: "images/goblet-squat.webp", sets: "2 × 10-12" },
       { name: "Glute Bridge einbeinig", icon: "glute-bridge", img: "images/glute-bridge.webp", sets: "2 × 12/Seite" },
-      { name: "Ausfallschritt (statisch)", icon: "lunge-static", sets: "2 × 8-10/Seite" },
-      { name: "Rumänisches Kreuzheben (leicht)", icon: "rdl", sets: "2 × 10" },
-      { name: "Clamshells", icon: "clamshell", sets: "2 × 15/Seite" },
-      { name: "Side-Lying Leg Raise", icon: "side-leg-raise", sets: "2 × 12-15/Seite" },
-      { name: "Banded Lateral Walk (Monster Walk)", icon: "lateral-walk", sets: "2 × 10 Schritte/Seite" },
-      { name: "Plank", icon: "plank", sets: "2 × 20-30 Sek." },
-      { name: "Side Plank", icon: "side-plank", sets: "2 × 15-20 Sek./Seite" },
-      { name: "Dead Bug", icon: "dead-bug", sets: "2 × 10/Seite" },
-      { name: "Rudern (Band oder Kurzhantel)", icon: "row-band", sets: "2 × 10-12" },
-      { name: "Liegestütz auf Knien", icon: "pushup-knee", sets: "2 × 8-12" }
+      { name: "Ausfallschritt (statisch)", icon: "lunge-static", img: "images/lunge-static.webp", sets: "2 × 8-10/Seite" },
+      { name: "Rumänisches Kreuzheben (leicht)", icon: "rdl", img: "images/rdl.webp", sets: "2 × 10" },
+      { name: "Clamshells", icon: "clamshell", img: "images/clamshell.webp", sets: "2 × 15/Seite" },
+      { name: "Side-Lying Leg Raise", icon: "side-leg-raise", img: "images/side-leg-raise.webp", sets: "2 × 12-15/Seite" },
+      { name: "Banded Lateral Walk (Monster Walk)", icon: "lateral-walk", img: "images/lateral-walk.webp", sets: "2 × 10 Schritte/Seite" },
+      { name: "Plank", icon: "plank", img: "images/plank.webp", sets: "2 × 20-30 Sek." },
+      { name: "Side Plank", icon: "side-plank", img: "images/side-plank.webp", sets: "2 × 15-20 Sek./Seite" },
+      { name: "Dead Bug", icon: "dead-bug", img: "images/dead-bug.webp", sets: "2 × 10/Seite" },
+      { name: "Rudern (Band oder Kurzhantel)", icon: "row-band", img: "images/row-band.webp", sets: "2 × 10-12" },
+      { name: "Liegestütz auf Knien", icon: "pushup-knee", img: "images/pushup-knee.webp", sets: "2 × 8-12" }
     ]
   },
   {
