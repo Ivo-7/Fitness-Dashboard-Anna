@@ -74,7 +74,6 @@ function workoutCard(workout, expanded) {
     `;
   } else if (workout.sections) {
     bodyContent = `
-      ${workout.intervalChart ? buildPaceChart(workout.intervalChart) : ''}
       <table class="exercise-table section-table">
         <tbody>
           ${workout.sections.map(s => `
@@ -85,6 +84,7 @@ function workoutCard(workout, expanded) {
           `).join('')}
         </tbody>
       </table>
+      ${workout.intervalChart ? buildPaceChart(workout.intervalChart) : ''}
     `;
   } else if (workout.list) {
     bodyContent = `
@@ -92,6 +92,7 @@ function workoutCard(workout, expanded) {
         ${workout.list.map(item => `
           <li>
             <span class="mobility-name">${item.name}</span>
+            ${item.duration ? `<span class="mobility-duration">${item.duration}</span>` : ''}
           </li>
         `).join('')}
       </ul>
