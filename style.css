@@ -388,7 +388,7 @@ footer {
 }
 
 .session.open .session-body {
-  max-height: 400px;
+  max-height: 3000px;
 }
 
 .session-meta {
