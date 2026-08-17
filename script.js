@@ -170,7 +170,7 @@ function supplementGroupCard(group, expanded) {
     : `<p class="empty-state">Keine Supplements in diesem Zeitfenster.</p>`;
 
   return `
-    <div class="session c-coral ${isOpen ? 'open' : ''}" data-session-key="${key}">
+    <div class="session c-blue ${isOpen ? 'open' : ''}" data-session-key="${key}">
       <button class="session-head" data-toggle="${key}">
         <span class="session-icon">${icons.supplement}</span>
         <span class="session-main">
