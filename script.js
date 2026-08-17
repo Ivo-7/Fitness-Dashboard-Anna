@@ -167,14 +167,37 @@ function attachSessionToggles() {
   document.querySelectorAll('[data-toggle]').forEach(btn => {
     btn.addEventListener('click', () => {
       const card = btn.closest('.session');
+      const container = card.parentElement;
+
+      // Andere offene Karten im selben Container schliessen (nur eine gleichzeitig offen)
+      container.querySelectorAll('.session.open').forEach(other => {
+        if (other !== card) {
+          other.classList.remove('open');
+          localStorage.setItem('open-' + other.dataset.sessionKey, 'false');
+        }
+      });
+
       const isOpen = card.classList.toggle('open');
       localStorage.setItem('open-' + btn.dataset.toggle, isOpen);
     });
   });
 }
 
+function enforceSingleOpenPerContainer() {
+  document.querySelectorAll('#workout-list, #supplements-list').forEach(container => {
+    const openCards = container.querySelectorAll('.session.open');
+    openCards.forEach((card, i) => {
+      if (i > 0) {
+        card.classList.remove('open');
+        localStorage.setItem('open-' + card.dataset.sessionKey, 'false');
+      }
+    });
+  });
+}
+
 renderWorkouts(workouts, 'workout-list');
 renderTopics(supplementRoutine, 'supplements-list');
+enforceSingleOpenPerContainer();
 attachSessionToggles();
 
 // Tab-Wechsel

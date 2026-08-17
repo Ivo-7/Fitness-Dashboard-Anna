@@ -1,6 +1,25 @@
 // Workouts für Anna – jeweils mit Übungsliste (Sätze × Wiederholungen)
 const workouts = [
   {
+    id: "laufeinstieg-woche-1",
+    title: "Laufeinstieg Woche 1",
+    subtitle: "Laufeinheit",
+    type: "run",
+    intervalChart: {
+      segments: [
+        { label: "Warmup", min: 5, mode: "walk" },
+        { label: "Lauf", min: 1, mode: "run", repeat: 8, repeatWith: { label: "Gehen", min: 2, mode: "walk" } },
+        { label: "Cooldown", min: 5, mode: "walk" }
+      ]
+    },
+    sections: [
+      { label: "Warmup", content: "5 Min gehen" },
+      { label: "Hauptteil", content: "8× (1 Min laufen / 2 Min gehen)" },
+      { label: "Cooldown", content: "5 Min gehen" },
+      { label: "Zielbereich", content: "HF-Zone 2-3, lockeres Tempo" }
+    ]
+  },
+  {
     id: "ganzkoerper-bbp",
     title: "Ganzkörper - Bauch Beine Po",
     subtitle: "Krafttraining",
@@ -18,25 +37,6 @@ const workouts = [
       { name: "Dead Bug", icon: "dead-bug", img: "images/dead-bug.webp", sets: "2 × 10/Seite" },
       { name: "Rudern (Band oder Kurzhantel)", icon: "row-band", img: "images/row-band.webp", sets: "2 × 10-12" },
       { name: "Liegestütz auf Knien", icon: "pushup-knee", img: "images/pushup-knee.webp", sets: "2 × 8-12" }
-    ]
-  },
-  {
-    id: "laufeinstieg-woche-1",
-    title: "Laufeinstieg Woche 1",
-    subtitle: "Laufeinheit",
-    type: "run",
-    intervalChart: {
-      segments: [
-        { label: "Warmup", min: 5, mode: "walk" },
-        { label: "Lauf", min: 1, mode: "run", repeat: 8, repeatWith: { label: "Gehen", min: 2, mode: "walk" } },
-        { label: "Cooldown", min: 5, mode: "walk" }
-      ]
-    },
-    sections: [
-      { label: "Warmup", content: "5 Min gehen" },
-      { label: "Hauptteil", content: "8× (1 Min laufen / 2 Min gehen)" },
-      { label: "Cooldown", content: "5 Min gehen" },
-      { label: "Zielbereich", content: "HF-Zone 2-3, lockeres Tempo" }
     ]
   },
   {
