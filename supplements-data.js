@@ -6,7 +6,6 @@ const supplementGroups = [
       {
         title: "Vitamin D3 + K2",
         details: [
-          "Zu einer fetthaltigen Mahlzeit – fettlöslich, wird so besser aufgenommen",
           "Wichtig für Knochen und Immunsystem – in CH oft niedrig"
         ]
       }
