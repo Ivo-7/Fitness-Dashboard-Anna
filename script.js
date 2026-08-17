@@ -10,12 +10,12 @@ function workoutCard(workout, expanded) {
     bodyContent = `
       <table class="exercise-table">
         <thead>
-          <tr><th>#</th><th>Übung</th><th>Sätze × Wdh.</th></tr>
+          <tr><th></th><th>Übung</th><th>Sätze × Wdh.</th></tr>
         </thead>
         <tbody>
-          ${workout.exercises.map((ex, i) => `
+          ${workout.exercises.map((ex) => `
             <tr>
-              <td>${i + 1}</td>
+              <td class="exercise-img-cell">${ex.icon && exerciseIcons[ex.icon] ? exerciseIcons[ex.icon] : ''}</td>
               <td>${ex.name}</td>
               <td>${ex.sets}</td>
             </tr>
@@ -38,9 +38,14 @@ function workoutCard(workout, expanded) {
     `;
   } else if (workout.list) {
     bodyContent = `
-      <ol class="mobility-list">
-        ${workout.list.map(item => `<li>${item}</li>`).join('')}
-      </ol>
+      <ul class="mobility-list">
+        ${workout.list.map(item => `
+          <li>
+            <span class="mobility-img">${item.icon && exerciseIcons[item.icon] ? exerciseIcons[item.icon] : ''}</span>
+            <span>${item.name}</span>
+          </li>
+        `).join('')}
+      </ul>
     `;
   }
 
