@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Anna's Fitness Dashboard</title>
+<link rel="stylesheet" href="style.css?v=1786958331">
+</head>
+<body>
+
+<header>
+  <h1>Fitness Dashboard</h1>
+  <p class="subtitle">Training · Supplements</p>
+</header>
+
+<nav class="tabs">
+  <button class="tab-btn active" data-tab="training">Training</button>
+  <button class="tab-btn" data-tab="supplements">Supplements</button>
+</nav>
+
+<main>
+
+  <!-- TRAINING -->
+  <section id="training" class="tab-content active">
+    <div id="training-today-hero"></div>
+    <div class="day-strip" id="training-day-strip"></div>
+    <div id="training-week-list"></div>
+  </section>
+
+  <!-- SUPPLEMENTS -->
+  <section id="supplements" class="tab-content">
+    <div id="supplements-list"></div>
+  </section>
+
+</main>
+
+<footer>
+  <p>Zuletzt aktualisiert von Claude</p>
+</footer>
+
+<script src="icons.js?v=1786958331"></script>
+<script src="type-config.js?v=1786958331"></script>
+<script src="training-data.js?v=1786958331"></script>
+<script src="supplements-data.js?v=1786958331"></script>
+<script src="script.js?v=1786958331"></script>
+</body>
+</html>
