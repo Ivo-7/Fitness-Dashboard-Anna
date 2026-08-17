@@ -1,12 +1,12 @@
 :root {
-  --bg: #f4f9fd;
+  --bg: #ffffff;
   --card: #ffffff;
   --border: #dbe9f4;
   --text: #24333d;
   --text-secondary: #6f8b9c;
   --accent: #3d94c9;
   --accent-bg: #e3f1fa;
-  --rest-bg: #eef5fa;
+  --rest-bg: #f7fafc;
   --radius: 14px;
 }
 
@@ -78,6 +78,7 @@ main {
   border-radius: var(--radius);
   padding: 14px 16px;
   margin-bottom: 12px;
+  box-shadow: 0 1px 3px rgba(61, 148, 201, 0.08);
 }
 
 .day-card.rest {
@@ -315,6 +316,7 @@ footer {
   border-radius: var(--radius);
   margin-bottom: 8px;
   overflow: hidden;
+  box-shadow: 0 1px 3px rgba(61, 148, 201, 0.08);
 }
 
 .session-head {
