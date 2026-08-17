@@ -101,7 +101,7 @@ function workoutCard(workout, expanded) {
 
   return `
     <div class="session c-${cfg.color} ${isOpen ? 'open' : ''}" data-session-key="${key}">
-      <button class="session-head" data-toggle="${key}">
+      <button class="session-head" data-toggle="${key}" ${workout.id === 'laufeinstieg-woche-1' ? 'data-admin="run"' : ''}>
         <span class="session-icon">${icons[workout.type] || icons.strength}</span>
         <span class="session-main">
           <span class="session-time">${workout.subtitle || ''}</span>
@@ -202,9 +202,13 @@ function renderTopics(topics, listId) {
   list.innerHTML = topics.map(t => sessionCard(t, false)).join('');
 }
 
+let runAdminSuppressClick = false;
+
 function attachSessionToggles() {
   document.querySelectorAll('[data-toggle]').forEach(btn => {
     btn.addEventListener('click', () => {
+      if (runAdminSuppressClick) { runAdminSuppressClick = false; return; }
+
       const card = btn.closest('.session');
       const container = card.parentElement;
       const exclusive = container.id !== 'supplements-list';
@@ -238,10 +242,111 @@ function enforceSingleOpenPerContainer() {
   });
 }
 
+// ---- Versteckte Admin-Funktion: Long-Press auf Laufeinheit -> Wochen-Auswahl ----
+
+const RUN_WEEK_KEY = 'anna-run-week';
+
+function getSelectedRunWeek() {
+  const v = parseInt(localStorage.getItem(RUN_WEEK_KEY), 10);
+  return (v >= 1 && v <= 12) ? v : 1;
+}
+
+function applyRunProgram() {
+  const runWorkout = workouts.find(w => w.id === 'laufeinstieg-woche-1');
+  if (!runWorkout) return;
+  Object.assign(runWorkout, buildRunWorkoutData(getSelectedRunWeek()));
+}
+
+function attachRunAdminLongPress() {
+  const card = document.querySelector('[data-admin="run"]');
+  if (!card) return;
+
+  let pressTimer = null;
+  const LONG_PRESS_MS = 600;
+
+  const start = () => {
+    pressTimer = setTimeout(() => {
+      runAdminSuppressClick = true;
+      openRunAdminMenu();
+    }, LONG_PRESS_MS);
+  };
+  const cancel = () => {
+    if (pressTimer) { clearTimeout(pressTimer); pressTimer = null; }
+  };
+
+  card.addEventListener('touchstart', start, { passive: true });
+  card.addEventListener('touchend', cancel);
+  card.addEventListener('touchmove', cancel);
+  card.addEventListener('touchcancel', cancel);
+  card.addEventListener('mousedown', start);
+  card.addEventListener('mouseup', cancel);
+  card.addEventListener('mouseleave', cancel);
+  card.addEventListener('contextmenu', e => e.preventDefault());
+}
+
+function openRunAdminMenu() {
+  let overlay = document.getElementById('run-admin-overlay');
+  if (!overlay) {
+    overlay = document.createElement('div');
+    overlay.id = 'run-admin-overlay';
+    overlay.className = 'admin-overlay';
+    document.body.appendChild(overlay);
+  }
+
+  const currentWeek = getSelectedRunWeek();
+  const phases = [...new Set(runProgram.map(w => w.phase))];
+
+  overlay.innerHTML = `
+    <div class="admin-modal">
+      <div class="admin-modal-header">
+        <span>Laufeinheit wählen</span>
+        <button class="admin-close" data-admin-close aria-label="Schliessen">&times;</button>
+      </div>
+      <div class="admin-modal-body">
+        ${phases.map(phase => `
+          <div class="admin-phase-label">${phase}</div>
+          ${runProgram.filter(w => w.phase === phase).map(w => `
+            <button class="admin-week-row ${w.week === currentWeek ? 'active' : ''}" data-week="${w.week}">
+              <span class="admin-week-num">Woche ${w.week}</span>
+              <span class="admin-week-summary">${w.summary}</span>
+            </button>
+          `).join('')}
+        `).join('')}
+      </div>
+    </div>
+  `;
+
+  overlay.classList.add('open');
+  overlay.querySelector('[data-admin-close]').addEventListener('click', closeRunAdminMenu);
+  overlay.addEventListener('click', e => { if (e.target === overlay) closeRunAdminMenu(); });
+  overlay.querySelectorAll('[data-week]').forEach(btn => {
+    btn.addEventListener('click', () => {
+      localStorage.setItem(RUN_WEEK_KEY, btn.dataset.week);
+      closeRunAdminMenu();
+      reRenderTraining();
+    });
+  });
+}
+
+function closeRunAdminMenu() {
+  const overlay = document.getElementById('run-admin-overlay');
+  if (overlay) overlay.classList.remove('open');
+}
+
+function reRenderTraining() {
+  applyRunProgram();
+  renderWorkouts(workouts, 'workout-list');
+  attachSessionToggles();
+  attachRunAdminLongPress();
+}
+
+applyRunProgram();
 renderWorkouts(workouts, 'workout-list');
 renderSupplementGroups(supplementGroups, 'supplements-list');
 enforceSingleOpenPerContainer();
 attachSessionToggles();
+attachRunAdminLongPress();
+
 
 // Tab-Wechsel
 const tabBtns = document.querySelectorAll('.tab-btn');
