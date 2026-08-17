@@ -1,9 +1,9 @@
 // 12-Wochen-Laufprogramm (Admin-Auswahl per Long-Press auf die Laufeinheit-Karte)
 const runProgram = [
   { week: 1, phase: "Phase 1 – Gewöhnung", segments: [{ label: "Lauf", min: 1, mode: "run", repeat: 8, repeatWith: { label: "Gehen", min: 2, mode: "walk" } }], summary: "8× (1 Min laufen / 2 Min gehen)" },
-  { week: 2, phase: "Phase 1 – Gewöhnung", segments: [{ label: "Lauf", min: 1.5, mode: "run", repeat: 8, repeatWith: { label: "Gehen", min: 2, mode: "walk" } }], summary: "8× (1,5 Min laufen / 2 Min gehen)" },
-  { week: 3, phase: "Phase 1 – Gewöhnung", segments: [{ label: "Lauf", min: 2, mode: "run", repeat: 6, repeatWith: { label: "Gehen", min: 1.5, mode: "walk" } }], summary: "6× (2 Min laufen / 1,5 Min gehen)" },
-  { week: 4, phase: "Phase 1 – Gewöhnung", segments: [{ label: "Lauf", min: 3, mode: "run", repeat: 6, repeatWith: { label: "Gehen", min: 1.5, mode: "walk" } }], summary: "6× (3 Min laufen / 1,5 Min gehen)" },
+  { week: 2, phase: "Phase 1 – Gewöhnung", segments: [{ label: "Lauf", min: 1.5, mode: "run", repeat: 8, repeatWith: { label: "Gehen", min: 2, mode: "walk" } }], summary: "8× (1.5 Min laufen / 2 Min gehen)" },
+  { week: 3, phase: "Phase 1 – Gewöhnung", segments: [{ label: "Lauf", min: 2, mode: "run", repeat: 6, repeatWith: { label: "Gehen", min: 1.5, mode: "walk" } }], summary: "6× (2 Min laufen / 1.5 Min gehen)" },
+  { week: 4, phase: "Phase 1 – Gewöhnung", segments: [{ label: "Lauf", min: 3, mode: "run", repeat: 6, repeatWith: { label: "Gehen", min: 1.5, mode: "walk" } }], summary: "6× (3 Min laufen / 1.5 Min gehen)" },
   { week: 5, phase: "Phase 2 – Ausdehnung", segments: [{ label: "Lauf", min: 4, mode: "run", repeat: 5, repeatWith: { label: "Gehen", min: 1, mode: "walk" } }], summary: "5× (4 Min laufen / 1 Min gehen)" },
   { week: 6, phase: "Phase 2 – Ausdehnung", segments: [{ label: "Lauf", min: 6, mode: "run", repeat: 4, repeatWith: { label: "Gehen", min: 1, mode: "walk" } }], summary: "4× (6 Min laufen / 1 Min gehen)" },
   { week: 7, phase: "Phase 2 – Ausdehnung", segments: [{ label: "Lauf", min: 8, mode: "run", repeat: 3, repeatWith: { label: "Gehen", min: 1, mode: "walk" } }], summary: "3× (8 Min laufen / 1 Min gehen)" },
@@ -15,7 +15,7 @@ const runProgram = [
 ];
 
 function formatMin(n) {
-  return Number.isInteger(n) ? String(n) : String(n).replace(".", ",");
+  return String(n);
 }
 
 // Baut Titel/Sections/IntervalChart für eine gewählte Woche zusammen
@@ -30,8 +30,11 @@ function buildRunWorkoutData(weekNum) {
   const mainSeg = entry.segments[0];
   const runMin = mainSeg.min;
   const walkMin = mainSeg.repeatWith ? mainSeg.repeatWith.min : 0;
+  const title = walkMin > 0
+    ? `Laufeinstieg ${formatMin(runMin)}:${formatMin(walkMin)}`
+    : `Laufeinstieg ${formatMin(runMin)} Min`;
   return {
-    title: `Laufeinstieg ${formatMin(runMin)}:${formatMin(walkMin)}`,
+    title,
     subtitle: `Laufeinheit · ${entry.phase}`,
     intervalChart: { segments: fullSegments },
     sections: [
