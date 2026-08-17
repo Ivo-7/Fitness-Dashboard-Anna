@@ -15,7 +15,11 @@ function workoutCard(workout, expanded) {
         <tbody>
           ${workout.exercises.map((ex) => `
             <tr>
-              <td class="exercise-img-cell">${ex.icon && exerciseIcons[ex.icon] ? exerciseIcons[ex.icon] : ''}</td>
+              <td class="exercise-img-cell">${
+                ex.img
+                  ? `<img src="${ex.img}" alt="${ex.name}" class="exercise-photo" loading="lazy">`
+                  : (ex.icon && exerciseIcons[ex.icon] ? exerciseIcons[ex.icon] : '')
+              }</td>
               <td>${ex.name}</td>
               <td>${ex.sets}</td>
             </tr>

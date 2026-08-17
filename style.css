@@ -557,7 +557,7 @@ footer {
 
 .exercise-table th:first-child,
 .exercise-table td:first-child {
-  width: 48px;
+  width: 90px;
 }
 
 .exercise-table th:last-child,
@@ -617,7 +617,7 @@ footer {
 
 /* Übungsbilder */
 .exercise-img-cell {
-  width: 48px;
+  width: 90px;
   padding-right: 0 !important;
 }
 
@@ -642,4 +642,15 @@ footer {
 
 .mobility-list li {
   align-items: center;
+}
+
+/* Echtes Übungsfoto (falls vorhanden, statt Silhouette) */
+.exercise-photo {
+  width: 100%;
+  max-width: 88px;
+  height: 56px;
+  object-fit: contain;
+  border-radius: 6px;
+  background: #fff;
+  display: block;
 }

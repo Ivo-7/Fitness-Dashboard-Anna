@@ -6,7 +6,7 @@ const workouts = [
     subtitle: "Krafttraining",
     type: "strength",
     exercises: [
-      { name: "Goblet Squat", icon: "goblet-squat", sets: "2 × 10-12" },
+      { name: "Goblet Squat", icon: "goblet-squat", img: "images/goblet-squat.webp", sets: "2 × 10-12" },
       { name: "Glute Bridge einbeinig", icon: "glute-bridge", sets: "2 × 12/Seite" },
       { name: "Ausfallschritt (statisch)", icon: "lunge-static", sets: "2 × 8-10/Seite" },
       { name: "Rumänisches Kreuzheben (leicht)", icon: "rdl", sets: "2 × 10" },
