@@ -10,18 +10,18 @@ function workoutCard(workout, expanded) {
     bodyContent = `
       <table class="exercise-table">
         <thead>
-          <tr><th></th><th>Übung</th><th>Sätze × Wdh.</th></tr>
+          <tr><th>Übung</th><th>Sätze × Wdh.</th><th></th></tr>
         </thead>
         <tbody>
           ${workout.exercises.map((ex) => `
             <tr>
+              <td>${ex.name}</td>
+              <td>${ex.sets}</td>
               <td class="exercise-img-cell">${
                 ex.img
                   ? `<img src="${ex.img}" alt="${ex.name}" class="exercise-photo" loading="lazy">`
                   : (ex.icon && exerciseIcons[ex.icon] ? exerciseIcons[ex.icon] : '')
               }</td>
-              <td>${ex.name}</td>
-              <td>${ex.sets}</td>
             </tr>
           `).join('')}
         </tbody>
@@ -45,8 +45,8 @@ function workoutCard(workout, expanded) {
       <ul class="mobility-list">
         ${workout.list.map(item => `
           <li>
+            <span class="mobility-name">${item.name}</span>
             <span class="mobility-img">${item.icon && exerciseIcons[item.icon] ? exerciseIcons[item.icon] : ''}</span>
-            <span>${item.name}</span>
           </li>
         `).join('')}
       </ul>

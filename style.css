@@ -555,13 +555,13 @@ footer {
   border-bottom: none;
 }
 
-.exercise-table th:first-child,
-.exercise-table td:first-child {
+.exercise-table th:last-child,
+.exercise-table td:last-child {
   width: 90px;
 }
 
-.exercise-table th:last-child,
-.exercise-table td:last-child {
+.exercise-table th:nth-child(2),
+.exercise-table td:nth-child(2) {
   text-align: right;
   color: var(--text-secondary);
   white-space: nowrap;
@@ -618,7 +618,7 @@ footer {
 /* Übungsbilder */
 .exercise-img-cell {
   width: 90px;
-  padding-right: 0 !important;
+  padding: 7px 0 7px 8px !important;
 }
 
 .exercise-img-cell svg {
@@ -638,6 +638,10 @@ footer {
 .mobility-img svg {
   width: 100%;
   height: 100%;
+}
+
+.mobility-name {
+  flex: 1;
 }
 
 .mobility-list li {
