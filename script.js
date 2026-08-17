@@ -18,7 +18,7 @@ function buildPaceChart(intervalChart) {
   const W = 600, H = 120, baseline = 100, top = 14;
   const pxPerMin = W / totalMin;
   const modeHeight = { walk: 0.28, run: 0.85 };
-  const modeColor = { walk: "#c9a8c2", run: "#d1567a" };
+  const modeColor = { walk: "#a9c9dd", run: "#3d94c9" };
 
   let x = 0;
   const bars = flat.map(seg => {
@@ -37,8 +37,8 @@ function buildPaceChart(intervalChart) {
         ${bars}
       </svg>
       <div class="pace-chart-legend">
-        <span><i style="background:#c9a8c2"></i>Gehen</span>
-        <span><i style="background:#d1567a"></i>Laufen</span>
+        <span><i style="background:#a9c9dd"></i>Gehen</span>
+        <span><i style="background:#3d94c9"></i>Laufen</span>
         <span class="pace-chart-total">${totalMin} Min gesamt</span>
       </div>
     </div>

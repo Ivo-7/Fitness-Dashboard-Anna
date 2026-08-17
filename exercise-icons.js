@@ -11,7 +11,7 @@ function buildIcon(bodyPaths, highlightCx, highlightCy, highlightR) {
     <g stroke="#b09a97" stroke-width="7.5" stroke-linecap="round" stroke-linejoin="round" opacity="0.8">
       ${bodyPaths.replace(/fill="currentColor"/g, 'fill="#b09a97"')}
     </g>
-    <circle cx="${highlightCx}" cy="${highlightCy}" r="${highlightR}" fill="#d1567a" opacity="0.88"/>
+    <circle cx="${highlightCx}" cy="${highlightCy}" r="${highlightR}" fill="#3d94c9" opacity="0.88"/>
   </svg>`;
 }
 
