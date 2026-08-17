@@ -586,3 +586,33 @@ footer {
   color: var(--text);
   white-space: normal;
 }
+
+/* Einfache nummerierte Übungsliste (z.B. Mobility) */
+.mobility-list {
+  margin: 0 14px 14px;
+  padding: 0 0 0 0;
+  list-style: none;
+  counter-reset: mobility-counter;
+}
+
+.mobility-list li {
+  counter-increment: mobility-counter;
+  display: flex;
+  align-items: baseline;
+  gap: 10px;
+  padding: 6px 0;
+  border-bottom: 1px solid var(--border);
+  font-size: 13.5px;
+  color: var(--text);
+}
+
+.mobility-list li:last-child { border-bottom: none; }
+
+.mobility-list li::before {
+  content: counter(mobility-counter);
+  flex-shrink: 0;
+  width: 20px;
+  font-size: 12px;
+  color: var(--text-secondary);
+  font-variant-numeric: tabular-nums;
+}

@@ -31,6 +31,33 @@ const workouts = [
       { label: "Cooldown", content: "5 Min gehen" },
       { label: "Zielbereich", content: "HF-Zone 2-3, lockeres Tempo" }
     ]
+  },
+  {
+    id: "mobility-workout",
+    title: "Mobility Workout",
+    subtitle: "Mobility",
+    type: "mobility",
+    list: [
+      "Childs Pose Stretch",
+      "Cobra Stretch",
+      "Static Lunges (Rechts/Links)",
+      "Static Squats",
+      "Toe Reaches",
+      "Bending Stretch",
+      "Ball Roll Backs",
+      "Leg Over Stretch (Rechts/Links)",
+      "Sit and Reach",
+      "Hip Stretch (Rechts/Links)",
+      "Lying Quad Stretch (Rechts/Links)",
+      "Across Body Stretch (Rechts/Links)",
+      "Cows Face Pose (Rechts/Links)",
+      "Shoulder Stretch",
+      "Revolved Low Lunge (Rechts/Links)",
+      "Lat Stretch",
+      "Wind Releasing Pose (Rechts/Links)",
+      "Toe Static Squat",
+      "Side + Forward Neck Stretch (Rechts)",
+      "Side + Forward Neck Stretch (Links)"
+    ]
   }
-  // Weiteres Workout folgt
 ];

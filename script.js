@@ -36,6 +36,12 @@ function workoutCard(workout, expanded) {
         </tbody>
       </table>
     `;
+  } else if (workout.list) {
+    bodyContent = `
+      <ol class="mobility-list">
+        ${workout.list.map(item => `<li>${item}</li>`).join('')}
+      </ol>
+    `;
   }
 
   return `
