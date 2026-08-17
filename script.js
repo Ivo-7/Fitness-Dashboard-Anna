@@ -1,7 +1,50 @@
-// ---- Generische Wochenplan-Rendering-Funktionen ----
+// ---- Workout-Karten (aufklappbar mit Übungstabelle) ----
 
-const today = new Date().getDay(); // 0=So ... 6=Sa
-const dayNamesShort = ["So", "Mo", "Di", "Mi", "Do", "Fr", "Sa"];
+function workoutCard(workout, expanded) {
+  const cfg = typeConfig[workout.type] || typeConfig.strength;
+  const key = 'workout-' + workout.id;
+  const isOpen = localStorage.getItem('open-' + key) === 'true' || expanded;
+  return `
+    <div class="session c-${cfg.color} ${isOpen ? 'open' : ''}" data-session-key="${key}">
+      <button class="session-head" data-toggle="${key}">
+        <span class="session-icon">${icons[workout.type] || icons.strength}</span>
+        <span class="session-main">
+          <span class="session-time">${workout.subtitle || ''}</span>
+          <span class="session-title">${workout.title}</span>
+        </span>
+        <span class="session-chevron">${icons.chevron}</span>
+      </button>
+      <div class="session-body">
+        <table class="exercise-table">
+          <thead>
+            <tr><th>#</th><th>Übung</th><th>Sätze × Wdh.</th></tr>
+          </thead>
+          <tbody>
+            ${workout.exercises.map((ex, i) => `
+              <tr>
+                <td>${i + 1}</td>
+                <td>${ex.name}</td>
+                <td>${ex.sets}</td>
+              </tr>
+            `).join('')}
+          </tbody>
+        </table>
+      </div>
+    </div>
+  `;
+}
+
+function renderWorkouts(workoutList, containerId) {
+  const container = document.getElementById(containerId);
+  if (!container) return;
+  if (!workoutList.length) {
+    container.innerHTML = `<p class="empty-state">Noch nichts hinterlegt.</p>`;
+    return;
+  }
+  container.innerHTML = workoutList.map(w => workoutCard(w, false)).join('');
+}
+
+// ---- Einfache aufklappbare Themen-Karten (z.B. Supplements) ----
 
 function sessionCard(session, expanded) {
   const cfg = typeConfig[session.type];
@@ -28,56 +71,6 @@ function sessionCard(session, expanded) {
   `;
 }
 
-function renderToday(weekData, heroId) {
-  const dayData = weekData.find(d => d.weekday === today);
-  const hero = document.getElementById(heroId);
-  if (!hero) return;
-  if (!dayData) { hero.innerHTML = ''; return; }
-  hero.innerHTML = `
-    <div class="today-label">Heute &middot; ${dayData.name}</div>
-    <div class="today-sessions">
-      ${dayData.sessions.map(s => sessionCard(s, false)).join('')}
-    </div>
-  `;
-}
-
-function renderWeekStrip(weekData, stripId) {
-  const strip = document.getElementById(stripId);
-  if (!strip) return;
-  strip.innerHTML = weekData.map(d => `
-    <button class="strip-day ${d.weekday === today ? 'active' : ''}" data-jump="${stripId}-day-${d.weekday}">
-      ${dayNamesShort[d.weekday]}
-    </button>
-  `).join('');
-  strip.querySelectorAll('[data-jump]').forEach(btn => {
-    btn.addEventListener('click', () => {
-      document.getElementById(btn.dataset.jump)?.scrollIntoView({ behavior: 'smooth', block: 'center' });
-    });
-  });
-}
-
-function renderWeekList(weekData, listId, stripId) {
-  const list = document.getElementById(listId);
-  if (!list) return;
-  const ordered = [...weekData].sort((a, b) => {
-    const da = (a.weekday - 1 + 7) % 7;
-    const db = (b.weekday - 1 + 7) % 7;
-    return da - db;
-  });
-  list.innerHTML = ordered.map(d => `
-    <div class="week-day-card ${d.weekday === today ? 'is-today' : ''}" id="${stripId}-day-${d.weekday}">
-      <h3>${d.name}</h3>
-      ${d.sessions.map(s => sessionCard(s, false)).join('')}
-    </div>
-  `).join('');
-}
-
-function renderWeekBlock(weekData, prefix) {
-  renderToday(weekData, prefix + '-today-hero');
-  renderWeekStrip(weekData, prefix + '-day-strip');
-  renderWeekList(weekData, prefix + '-week-list', prefix);
-}
-
 function renderTopics(topics, listId) {
   const list = document.getElementById(listId);
   if (!list) return;
@@ -98,7 +91,7 @@ function attachSessionToggles() {
   });
 }
 
-renderWeekBlock(trainingWeek, 'training');
+renderWorkouts(workouts, 'workout-list');
 renderTopics(supplementRoutine, 'supplements-list');
 attachSessionToggles();
 
