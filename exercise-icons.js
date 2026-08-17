@@ -1,16 +1,17 @@
-// Eigene Silhouetten-Illustrationen je Übung/Pose: gedämpfte Körperkontur
-// (dicke, abgerundete Konturlinien statt Fotos) + ein Akzent-Kreis auf der
-// primär trainierten/gedehnten Muskelgruppe. Die Akzentfarbe übernimmt
-// automatisch die Kartenfarbe (var(--session-color)) der jeweiligen Karte.
+// Eigene Silhouetten-Illustrationen je Übung/Pose: gedämpfte, graue
+// Körperkontur + ein Akzent-Kreis auf der primär trainierten/gedehnten
+// Muskelgruppe. Farbschema bewusst an den Foto-Stil der Kraftübungen
+// angelehnt (Graustufen-Körper + orange-rote Muskel-Markierung), damit
+// beide Workouts optisch zueinander passen.
 // Ein Icon-Key wird von mehreren Übungen geteilt, wenn Ausgangsposition
 // und Zielregion sehr ähnlich sind (z.B. Rechts/Links-Varianten).
 
 function buildIcon(bodyPaths, highlightCx, highlightCy, highlightR) {
   return `<svg viewBox="0 0 60 60" fill="none">
-    <g stroke="currentColor" stroke-width="7" stroke-linecap="round" stroke-linejoin="round" opacity="0.45">
-      ${bodyPaths}
+    <g stroke="#9c988f" stroke-width="7.5" stroke-linecap="round" stroke-linejoin="round" opacity="0.8">
+      ${bodyPaths.replace(/fill="currentColor"/g, 'fill="#9c988f"')}
     </g>
-    <circle cx="${highlightCx}" cy="${highlightCy}" r="${highlightR}" fill="var(--session-color)" opacity="0.85"/>
+    <circle cx="${highlightCx}" cy="${highlightCy}" r="${highlightR}" fill="#d9542a" opacity="0.88"/>
   </svg>`;
 }
 
